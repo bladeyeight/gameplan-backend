@@ -36,8 +36,8 @@ mongoose.connection
 const GameSchema = new mongoose.Schema({
     title: String,
     image: String,
-    Progress: String,
-    List: String
+    progress: String,
+    list: String
 });
 
 const Games = mongoose.model("Games", GameSchema);
