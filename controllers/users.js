@@ -15,14 +15,21 @@ app.use('/users', userController);
 
 
 // New (registration page)
-userRouter.get('/new', (req, res) => {
-	res.redirect('users/new', {
-		currentUser: req.session.currentUser
-	});
+userRouter.get('/new', async (req, res) => {
+	try {
+        // send all users
+        res.json(await User.find({
+          currentUser: req.session.currentUser
+        }));
+    } catch (error) {
+        //send error
+        res.status(400).json(error);
+    }
 });
 
+
 // Create (registration route)
-userRouter.post('/', (req, res) => {
+userRouter.post('/', async (req, res) => {
     //overwrite the user password with the hashed password, then pass that in to our database
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
