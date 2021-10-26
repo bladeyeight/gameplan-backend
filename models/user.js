@@ -2,14 +2,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// User Schema
-const userSchema = Schema({
-  email: { type: String, unique: true, required: true },
-  password: { type: String, required: true }
+const userSchema = new Schema({
+  name: String,
+  email: {
+    type: String,
+    required: true,
+    lowercase: true,
+    unique: true
+  },
+  password: String
+}, {
+  timestamps: true
 });
 
-// User Model
-const User = mongoose.model('User', userSchema);
+userSchema.set('toJSON', {
+  transform: function (doc, ret) {
+    // remove the password property when serializing doc to JSON
+    delete ret.password;
+    return ret;
+  }
+});
 
-// Export User Model
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
