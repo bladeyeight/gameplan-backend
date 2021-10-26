@@ -74,9 +74,7 @@ app.get("/", (req, res) => {
 app.get("/games", async (req, res) => {
     try {
         // send all games
-        res.json(await Games.find({
-          currentUser: req.session.currentUser
-        }));
+        res.json(await Games.find({}));
     } catch (error) {
         //send error
         res.status(400).json(error);
