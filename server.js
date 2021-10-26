@@ -15,11 +15,11 @@ const mongoose = require("mongoose");
 // import middlware
 const cors = require("cors");
 const morgan = require("morgan");
-const session = require('express-session');
-const bcrypt = require('bcrypt');
-const sessionsController = require('./models/score');
-app.use('/sessions', sessionsController);
-const logger = require('morgan');
+// const session = require('express-session');
+// const bcrypt = require('bcrypt');
+// const sessionsController = require('./models/score');
+// app.use('/sessions', sessionsController);
+// const logger = require('morgan');
 
 const scoresRouter = require('./routes/api/scores')
 const usersRouter = require ('./routes/api/users');
@@ -31,8 +31,8 @@ const usersRouter = require ('./routes/api/users');
 mongoose.connect(MONGODB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
+    // useFindAndModify: false,
+    // useCreateIndex: true,
 });
 // Connection Events
 mongoose.connection
@@ -58,7 +58,7 @@ const Games = mongoose.model("Games", GameSchema);
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging
 app.use(express.json()); // parse json bodies
-app.use(logger('dev'));
+// app.use(logger('dev'));
 // app.use('/api/scores', scoresRouter);
 // app.use('/api/users', usersRouter);
 // app.use (
