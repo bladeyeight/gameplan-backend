@@ -59,15 +59,15 @@ app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging
 app.use(express.json()); // parse json bodies
 app.use(logger('dev'));
-app.use('/api/scores', scoresRouter);
-app.use('/api/users', usersRouter);
-app.use (
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false
-  })
-);
+// app.use('/api/scores', scoresRouter);
+// app.use('/api/users', usersRouter);
+// app.use (
+//   session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: false
+//   })
+// );
 ///////////////////////////////
 // ROUTES
 ////////////////////////////////
