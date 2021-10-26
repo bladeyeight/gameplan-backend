@@ -15,6 +15,11 @@ const mongoose = require("mongoose");
 // import middlware
 const cors = require("cors");
 const morgan = require("morgan");
+const session = require('express-session');
+const bcrypt = require('bcrypt');
+const sessionsController = require('./controllers/sessions');
+app.use('/sessions', sessionsController);
+
 
 ///////////////////////////////
 // DATABASE CONNECTION
@@ -23,6 +28,8 @@ const morgan = require("morgan");
 mongoose.connect(MONGODB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
 });
 // Connection Events
 mongoose.connection
@@ -48,7 +55,13 @@ const Games = mongoose.model("Games", GameSchema);
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging
 app.use(express.json()); // parse json bodies
-
+app.use (
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
 ///////////////////////////////
 // ROUTES
 ////////////////////////////////
@@ -61,12 +74,15 @@ app.get("/", (req, res) => {
 app.get("/games", async (req, res) => {
     try {
         // send all games
-        res.json(await Games.find({}));
+        res.json(await Games.find({
+          currentUser: req.session.currentUser
+        }));
     } catch (error) {
         //send error
         res.status(400).json(error);
     }
 });
+
 
 // GAME CREATE ROUTE
 app.post("/games", async (req, res) => {
