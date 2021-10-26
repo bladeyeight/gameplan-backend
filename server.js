@@ -21,8 +21,8 @@ const morgan = require("morgan");
 // app.use('/sessions', sessionsController);
 // const logger = require('morgan');
 
-const scoresRouter = require('./routes/api/scores')
-const usersRouter = require ('./routes/api/users');
+// const scoresRouter = require('./routes/api/scores')
+// const usersRouter = require ('./routes/api/users');
 
 ///////////////////////////////
 // DATABASE CONNECTION
