@@ -16,7 +16,7 @@ app.use('/users', userController);
 
 // New (registration page)
 userRouter.get('/new', (req, res) => {
-	res.redirect('users/new.ejs', {
+	res.redirect('users/new', {
 		currentUser: req.session.currentUser
 	});
 });

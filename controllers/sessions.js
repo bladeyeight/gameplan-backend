@@ -6,7 +6,7 @@ const User = require('../models/user.js');
 
 // New (login page)
 sessionsRouter.get('/new', (req, res) => {
-	res.redirect('sessions/new.ejs', {
+	res.redirect('sessions/new', {
 		currentUser: req.session.currentUser
 	});
 });
